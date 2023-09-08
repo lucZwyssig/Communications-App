@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+
+  mongodb:
+    image: mongo:5.0
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${DB_INIT_CREDENTIALS}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_INIT_CREDENTIALS}
+      
+    volumes:
+      - ./init.js:/docker-entrypoint-initdb.d/init.js:ro

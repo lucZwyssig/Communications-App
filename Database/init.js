@@ -1,11 +1,9 @@
-db = db.getSiblingDB('Communications-app');
-db.createCollection('users');
+db = db.getSiblingDB('Communication');
+db.createCollection('Appusers');
 db.createUser({
-    user: `${process.env.DB_USERNAME}`,
-    pwd: `${process.env.DB_PASSWORD}`,
+    user: '${MONGO_USERNAME}',
+    pwd: '${MONGO_PASSWORD}',
     roles: [
-      { role: 'readWrite', db: 'Communications-app' }
+      { role: 'readWrite', db: 'Saves' }
     ]
-  });
-
-  
+});

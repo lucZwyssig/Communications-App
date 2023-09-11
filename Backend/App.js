@@ -1,5 +1,9 @@
 const express = require("express");
 
+require('dotenv').config();
+
+const { MONGO_USERNAME, MONGO_PASSWORD } = process.env;
+
 const app = express();
 
 const cors = require("cors");
@@ -14,18 +18,16 @@ app.use(cors({
     origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "DELETE"],
     credentials: true
-}))
-
-
+}));
 
 app.use("/api", LoginRoutes);
 
-mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:27017`).then(() =>{
+mongoose.connect(`mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@localhost:27017`).then(() =>{
     console.log("connected to mongodb");
 }).catch((error) => {
     console.log(error);
     process.exit(1);
-})
+});
 
 app.listen(3001, () => {
     console.log(`server started on port 3001`);

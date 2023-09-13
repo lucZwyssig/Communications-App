@@ -10,7 +10,7 @@ const cors = require("cors");
 
 const mongoose = require("mongoose");
 
-const LoginRoutes = require("./Routes/LoginRoutes");
+const LoginRoutes = require("./Routes/Routes");
 
 app.use(express.json());
 

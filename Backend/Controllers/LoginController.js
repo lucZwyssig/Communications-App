@@ -15,7 +15,8 @@ const register = async (req, res) => {
         const user = await UserSchema.create({email, password: hashedPassword});
         const token = createToken(user._id);
         res.cookie("jwtToken", token), {
-            withCredentials: true
+            withCredentials: true,
+            
         };
         res.send("user created").status(201);
         
@@ -47,7 +48,7 @@ const login = async (req, res) => {
         if (isPasswordValid) {
             const token = createToken(user._id);
             res.cookie("jwtToken", token), {
-            withCredentials: true
+            withCredentials: true,
             }
             res.send("logged in").status(200);  
 
@@ -60,7 +61,7 @@ const login = async (req, res) => {
     }
 };
 
-const verify = async (req, res, next) => {
+const verify =  (req, res, next) => {
     const token = req.header("Authorization");
     
     if (!token) {
@@ -70,11 +71,16 @@ const verify = async (req, res, next) => {
     try {
         const decodedToken = jwt.verify(token, process.env.JWTTOKEN);
         req.userId = decodedToken;
-        next(userId);
+        next();
     } catch (error) {
         return res.status(401).send("Invalid token");
     }
-}
+};
+
+const logout = (req, res) => {
+    res.clearCookie("jwtToken");
+    res.json({message: "logged out"}).status(200);
+} 
 
 
 
@@ -83,6 +89,7 @@ const verify = async (req, res, next) => {
 module.exports = {
     register,
     login,
-    verify
+    verify,
+    logout
     
 }

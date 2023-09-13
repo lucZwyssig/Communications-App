@@ -22,7 +22,7 @@ app.use(cors({
 
 app.use("/api", LoginRoutes);
 
-mongoose.connect(`mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@localhost:27017`).then(() =>{
+mongoose.connect(`mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@localhost:27017/Communication`).then(() =>{
     console.log("connected to mongodb");
 }).catch((error) => {
     console.log(error);

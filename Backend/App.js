@@ -20,6 +20,7 @@ app.use(cors({
     credentials: true
 }));
 
+
 app.use("/api", LoginRoutes);
 
 mongoose.connect(`mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@localhost:27017/Communication`).then(() =>{

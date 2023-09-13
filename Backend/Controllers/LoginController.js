@@ -60,11 +60,29 @@ const login = async (req, res) => {
     }
 };
 
+const verify = async (req, res, next) => {
+    const token = req.header("Authorization");
+    
+    if (!token) {
+        return res.status(401).send("Not Authorized");
+    }
+
+    try {
+        const decodedToken = jwt.verify(token, process.env.JWTTOKEN);
+        req.userId = decodedToken;
+        next(userId);
+    } catch (error) {
+        return res.status(401).send("Invalid token");
+    }
+}
+
+
 
 
 
 module.exports = {
     register,
-    login
+    login,
+    verify
     
 }

@@ -30,6 +30,7 @@ const register = async (req, res) => {
     }
 };
 
+
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -58,6 +59,8 @@ const login = async (req, res) => {
         res.status(500).send("Internal server error"); 
     }
 };
+
+
 
 
 

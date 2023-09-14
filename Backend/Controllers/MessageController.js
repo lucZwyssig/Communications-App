@@ -8,7 +8,6 @@ const getMessages = async (req, res) => {
 
     try {
         const channel = await ChatChannel.findById(channelId);
-        
 
         if (!channel.members.includes(userId)) {
             return res.status(403).json({ error: 'Access denied' });
@@ -23,28 +22,29 @@ const getMessages = async (req, res) => {
     }
 };
 
-const getChannels = async (req, res) => {
+const postMessage = async (req, res) => {
     const userId = req.userId.username;
-    try {
-        const channels = await ChatChannel.find({members: userId});
-        res.status(200).json({ channels });
+    const channelId = req.params.channelId;
+    const text = req.body.text; 
 
+    try {
+        const channel = await ChatChannel.findById(channelId);
+        if (!channel) {
+            return res.status(404).json({ message: 'Not found' });
+        }
+        if (!channel.members.includes(userId)) {
+            return res.status(403).json({ message: 'Access denied' });
+        }
+        const newMessage = await ChatMessage.create({ sender: userId, channel: channelId, text: text, timestamp: Date.now() }); 
+
+        res.status(201).json({ message: "successfully posted message", newMessage });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        console.log(error);
+        res.status(500).json({ message: 'Internal server error' });
     }
-    
 }
-
-/*const addChannel = async (req, res) => {
-    try {
-    const userId = req.userId.username;
-    const channelName = req.body;
-    const newChannel = await ChatChannel.create
-    }
-}*/
 
 module.exports = {
     getMessages,
-    getChannels
+    postMessage
 }

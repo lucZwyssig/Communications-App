@@ -6,7 +6,9 @@ const LoginController = require("../Controllers/LoginController");
 
 const TestController = require("../Controllers/TestController");
 
-const ChatController = require("../Controllers/ChatController");
+const ChannelController = require("../Controllers/ChannelController");
+
+const MessageController = require("../Controllers/MessageController");
 
 router.post("/register", LoginController.register);
 
@@ -16,9 +18,15 @@ router.get("/test", LoginController.verify, TestController.test);
 
 router.delete("/logout", LoginController.verify, LoginController.logout);
 
-router.get("/chats/:channelId/messages", LoginController.verify, ChatController.getMessages);
+router.get("/chats/:channelId/messages", LoginController.verify, MessageController.getMessages);
 
-router.get("/chats/channels", LoginController.verify, ChatController.getChannels);
+router.get("/chats/channels", LoginController.verify, ChannelController.getChannels);
+
+router.post("/chats/channel", LoginController.verify, ChannelController.addChannel);
+
+router.post("/chats/:channelId/messages", LoginController.verify, MessageController.postMessage);
+
+router.post("/chats/:channelId", LoginController.verify, ChannelController.addUser);
 
 module.exports = router;
 

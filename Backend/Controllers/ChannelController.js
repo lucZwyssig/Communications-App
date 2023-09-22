@@ -2,18 +2,18 @@ const UserSchema = require("../Models/UserSchema");
 const ChatMessage = require('../Models/ChatMessageSchema');
 const ChatChannel = require("../Models/ChatChannelSchema");
 
-
+//TODO add middleware to check if user has access to channel
 const getChannels = async (req, res) => {
     const userId = req.userId.username;
     try {
-        const channels = await ChatChannel.find({members: userId});
+        const channels = await ChatChannel.find({ members: userId });
         res.status(200).json({ channels });
 
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
-    
+
 }
 
 const addChannel = async (req, res) => {
@@ -28,7 +28,7 @@ const addChannel = async (req, res) => {
         const newChannel = await ChatChannel.create({ name: channelName, members: [userId] });
         res.status(201).json({ message: "Channel created", channel: newChannel });
     } catch (error) {
-         {
+        {
             console.error(error);
             res.status(500).json({ message: 'Internal server error' });
         }
@@ -37,6 +37,7 @@ const addChannel = async (req, res) => {
 
 const addUser = async (req, res) => {
     try {
+        const userId = req.userId.username;
         const email = req.body.email;
         const channelId = req.params.channelId;
 
@@ -52,6 +53,10 @@ const addUser = async (req, res) => {
             return res.status(404).json({ message: "Channel not found" });
         }
 
+        if (channel.members.indexOf(userId) === -1) {
+            return res.status(403).json({ message: 'Access denied' });
+        }
+
         if (channel.members.includes(user._id)) {
             return res.status(400).json({ message: "User already exists in the channel" });
         }
@@ -65,6 +70,12 @@ const addUser = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 };
+
+
+const getUsers = async (req, res) => {
+    const channelId = req.params.channelId;
+    
+}
 
 
 

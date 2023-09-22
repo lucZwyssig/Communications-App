@@ -5,26 +5,26 @@ const jwt = require("jsonwebtoken");
 
 const createToken = (username) => {
     const payload = { username };
-    return jwt.sign(payload, process.env.JWTTOKEN, {expiresIn: "3600s"});
+    return jwt.sign(payload, process.env.JWTTOKEN, { expiresIn: "3600s" });
 };
 
 const register = async (req, res) => {
-    try{
-        const{email, password} = req.body;
+    try {
+        const { email, password } = req.body;
         const hashedPassword = await argon2.hash(password);
-        const user = await UserSchema.create({email, password: hashedPassword});
+        const user = await UserSchema.create({ email, password: hashedPassword });
         const token = createToken(user._id);
         res.cookie("jwtToken", token), {
             withCredentials: true,
-            
+
         };
         res.send("user created").status(201);
-        
-    } 
-    catch(error){
+    
+    }
+    catch (error) {
         if (error.code === 11000) {
             res.status(409).json({ message: 'Email already exists' });
-          } else {
+        } else {
             console.error(error);
             res.status(500).json({ message: 'Internal server error' });
         }
@@ -36,11 +36,11 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        
+
         const user = await UserSchema.findOne({ email });
 
         if (!user) {
-            return res.sendStatus(404); 
+            return res.sendStatus(404);
         }
 
         const isPasswordValid = await argon2.verify(user.password, password);
@@ -48,22 +48,22 @@ const login = async (req, res) => {
         if (isPasswordValid) {
             const token = createToken(user._id);
             res.cookie("jwtToken", token), {
-            withCredentials: true,
+                withCredentials: true,
             }
-            res.send("logged in").status(200);  
+            res.send("logged in").status(200);
 
         } else {
-            res.sendStatus(401); 
+            res.sendStatus(401);
         }
     } catch (error) {
         console.log("There is an error:", error);
-        res.status(500).send("Internal server error"); 
+        res.status(500).send("Internal server error");
     }
 };
 
-const verify =  (req, res, next) => {
+const verify = (req, res, next) => {
     const token = req.header("Authorization");
-    
+
     if (!token) {
         return res.status(401).send("Not Authorized");
     }
@@ -79,8 +79,8 @@ const verify =  (req, res, next) => {
 
 const logout = (req, res) => {
     res.clearCookie("jwtToken");
-    res.json({message: "logged out"}).status(200);
-} 
+    res.json({ message: "logged out" }).status(200);
+}
 
 
 
@@ -91,5 +91,5 @@ module.exports = {
     login,
     verify,
     logout
-    
+
 }

@@ -14,10 +14,10 @@ const register = async (req, res) => {
         const hashedPassword = await argon2.hash(password);
         const user = await UserSchema.create({ email, password: hashedPassword });
         const token = createToken(user._id);
-        res.cookie("jwtToken", token), {
+        res.cookie("jwtToken", token, {
             withCredentials: true,
-
-        };
+            sameSite: 'strict',
+          });
         res.send("user created").status(201);
     
     }

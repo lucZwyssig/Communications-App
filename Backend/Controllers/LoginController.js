@@ -17,9 +17,9 @@ const register = async (req, res) => {
         res.cookie("jwtToken", token, {
             withCredentials: true,
             sameSite: 'strict',
-          });
+        });
         res.send("user created").status(201);
-    
+
     }
     catch (error) {
         if (error.code === 11000) {
@@ -77,6 +77,7 @@ const verify = (req, res, next) => {
     }
 };
 
+
 const logout = (req, res) => {
     res.clearCookie("jwtToken");
     res.json({ message: "logged out" }).status(200);
@@ -90,6 +91,6 @@ module.exports = {
     register,
     login,
     verify,
-    logout
+    logout   
 
 }

@@ -28,5 +28,7 @@ router.post("/chats/:channelId/messages", LoginController.verify, MessageControl
 
 router.post("/chats/:channelId", LoginController.verify, ChannelController.addUser);
 
+
+
 module.exports = router;
 

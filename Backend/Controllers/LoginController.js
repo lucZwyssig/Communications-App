@@ -62,10 +62,10 @@ const login = async (req, res) => {
 };
 
 const verify = (req, res, next) => {
-    const token = req.header("Authorization");
+    const token = req.cookies.jwtToken;
 
     if (!token) {
-        return res.status(401).send("Not Authorized");
+        return res.status(401).send("Not Authorizedggg");
     }
 
     try {
@@ -81,16 +81,12 @@ const verify = (req, res, next) => {
 const logout = (req, res) => {
     res.clearCookie("jwtToken");
     res.json({ message: "logged out" }).status(200);
-}
-
-
-
-
+};
 
 module.exports = {
     register,
     login,
     verify,
-    logout   
+    logout
 
 }

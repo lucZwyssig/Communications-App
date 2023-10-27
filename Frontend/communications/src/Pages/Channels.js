@@ -1,7 +1,9 @@
+import ChannelList from "../Components/Channels/ChannelList";
+
 function Channels() {
     return(
         <div>
-            it works!
+            <ChannelList/>
         </div>
     );
 } export default Channels;

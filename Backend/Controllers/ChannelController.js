@@ -2,7 +2,7 @@ const UserSchema = require("../Models/UserSchema");
 const ChatMessage = require('../Models/ChatMessageSchema');
 const ChatChannel = require("../Models/ChatChannelSchema");
 
-//TODO add middleware to check if user has access to channel
+
 const getChannels = async (req, res) => {
     const userId = req.userId.username;
     try {

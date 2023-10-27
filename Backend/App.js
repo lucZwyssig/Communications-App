@@ -1,5 +1,7 @@
 const express = require("express");
 
+const cookieParser = require("cookie-parser");
+
 require('dotenv').config();
 
 const { MONGO_USERNAME, MONGO_PASSWORD } = process.env;
@@ -13,6 +15,8 @@ const mongoose = require("mongoose");
 const LoginRoutes = require("./Routes/Routes");
 
 app.use(express.json());
+
+app.use(cookieParser());
 
 app.use(cors({
     origin: ["http://localhost:3000"],

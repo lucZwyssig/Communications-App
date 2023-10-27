@@ -1,6 +1,7 @@
-import LoginForm from "../Components/LoginForm";
+import LoginForm from "../Components/Authorization/LoginForm";
 
 function Login(){
+    
     return(
         <LoginForm/>
     );

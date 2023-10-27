@@ -18,7 +18,6 @@ function LoginForm(props) {
       });
 
       if (response.status === 200) {
-
         console.log(response.data.message);
         navigate('/Channels');
       }

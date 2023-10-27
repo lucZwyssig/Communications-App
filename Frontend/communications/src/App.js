@@ -4,6 +4,7 @@ import Login from './Pages/Login';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Channels from './Pages/Channels';
+import SingleChannel from './Pages/SingleChannel';
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
       <Routes>
         <Route index element={<Register/>} />
         <Route path='/login' element={<Login/>}/>
-        <Route path='/Channels' element={<Channels/>}/>
-        
+        <Route path='/chats/channels' element={<Channels/>}/>
+        <Route path='/chats/channel/:channelId' element={<SingleChannel/>}/>     
       </Routes>
       </BrowserRouter>
       

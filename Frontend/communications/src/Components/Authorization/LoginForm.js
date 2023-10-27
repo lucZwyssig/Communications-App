@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm(props) {
   const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ function LoginForm(props) {
 
       if (response.status === 200) {
         console.log(response.data.message);
-        navigate('/Channels');
+        navigate('/chats/channels');
       }
 
     } catch (error) {

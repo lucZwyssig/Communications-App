@@ -65,7 +65,7 @@ const verify = (req, res, next) => {
     const token = req.cookies.jwtToken;
 
     if (!token) {
-        return res.status(401).send("Not Authorizedggg");
+        return res.status(401).send("Not Authorized");
     }
 
     try {

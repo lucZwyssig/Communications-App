@@ -3,8 +3,8 @@ const argon2 = require("argon2");
 
 const jwt = require("jsonwebtoken");
 
-const createToken = (userId) => {
-    const payload = { userId };
+const createToken = (userId, username) => {
+    const payload = { userId, username };
     return jwt.sign(payload, process.env.JWTTOKEN, { expiresIn: "3600s" });
 };
 
@@ -13,7 +13,7 @@ const register = async (req, res) => {
         const { username, password } = req.body;
         const hashedPassword = await argon2.hash(password);
         const user = await UserSchema.create({ username, password: hashedPassword });
-        const token = createToken(user._id);
+        const token = createToken(user._id, user.username);
         res.cookie("jwtToken", token, {
             withCredentials: true,
             sameSite: 'strict',
@@ -47,7 +47,7 @@ const login = async (req, res) => {
         const isPasswordValid = await argon2.verify(user.password, password);
 
         if (isPasswordValid) {
-            const token = createToken(user._id);
+            const token = createToken(user._id, user.username);
             res.cookie("jwtToken", token), {
                 withCredentials: true,
             }

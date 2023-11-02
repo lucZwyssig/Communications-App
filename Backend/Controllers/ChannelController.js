@@ -4,7 +4,7 @@ const ChatChannel = require("../Models/ChatChannelSchema");
 
 
 const getChannels = async (req, res) => {
-    const userId = req.userId.username;
+    const userId = req.token.userId;
     try {
         const channels = await ChatChannel.find({ members: userId });
         res.status(200).json({ channels });
@@ -18,7 +18,7 @@ const getChannels = async (req, res) => {
 
 const addChannel = async (req, res) => {
     try {
-        const userId = req.userId.username;
+        const userId = req.token.userId;
         const { channelName } = req.body;
 
         if (!channelName) {
@@ -37,11 +37,11 @@ const addChannel = async (req, res) => {
 
 const addUser = async (req, res) => {
     try {
-        const userId = req.userId.username;
-        const email = req.body.email;
+        const userId = req.token.userId;
+        const username = req.body.username;
         const channelId = req.params.channelId;
 
-        const user = await UserSchema.findOne({ email });
+        const user = await UserSchema.findOne({ username });
 
         if (!user) {
             return res.status(404).json({ message: "User not found" });

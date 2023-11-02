@@ -3,7 +3,7 @@ const ChatMessage = require('../Models/ChatMessageSchema');
 const ChatChannel = require("../Models/ChatChannelSchema");
 
 const getMessages = async (req, res) => {
-    const userId = req.userId.username;
+    const userId = req.token.userId;
     const channelId = req.params.channelId;
 
     try {
@@ -23,7 +23,7 @@ const getMessages = async (req, res) => {
 };
 
 const postMessage = async (req, res) => {
-    const userId = req.userId.username;
+    const userId = req.token.userId;
     const channelId = req.params.channelId;
     const text = req.body.text; 
 

@@ -3,16 +3,16 @@ const argon2 = require("argon2");
 
 const jwt = require("jsonwebtoken");
 
-const createToken = (username) => {
-    const payload = { username };
+const createToken = (userId) => {
+    const payload = { userId };
     return jwt.sign(payload, process.env.JWTTOKEN, { expiresIn: "3600s" });
 };
 
 const register = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { username, password } = req.body;
         const hashedPassword = await argon2.hash(password);
-        const user = await UserSchema.create({ email, password: hashedPassword });
+        const user = await UserSchema.create({ username, password: hashedPassword });
         const token = createToken(user._id);
         res.cookie("jwtToken", token, {
             withCredentials: true,
@@ -23,7 +23,8 @@ const register = async (req, res) => {
     }
     catch (error) {
         if (error.code === 11000) {
-            res.status(409).json({ message: 'Email already exists' });
+            res.status(409).json({ message: 'Username already exists' });
+            console.log(error)
         } else {
             console.error(error);
             res.status(500).json({ message: 'Internal server error' });
@@ -34,10 +35,10 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { username, password } = req.body;
 
 
-        const user = await UserSchema.findOne({ email });
+        const user = await UserSchema.findOne({ username });
 
         if (!user) {
             return res.sendStatus(404);
@@ -70,7 +71,7 @@ const verify = (req, res, next) => {
 
     try {
         const decodedToken = jwt.verify(token, process.env.JWTTOKEN);
-        req.userId = decodedToken;
+        req.token = decodedToken;
         next();
     } catch (error) {
         return res.status(401).send("Invalid token");

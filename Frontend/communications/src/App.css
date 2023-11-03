@@ -1,0 +1,43 @@
+
+
+.AuthorizationContainer{
+    background-color: #407088;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.AuthorizationForm{
+    border: 1px solid;
+    padding: 5% 5% 10% 5%;
+    background-color: #132743;
+    border-radius: 15px;
+}
+
+.AuthorizationForm h1{
+    color: antiquewhite;
+    margin-bottom: 20px;
+    font-size: 50px;
+}
+
+.AuthorizationForm h2{
+    color: antiquewhite;
+    text-decoration: underline white;
+}
+
+.AuthorizationForm input[type=text], input[type=password]{
+    background-color: rgb(243, 230, 215);
+}
+
+.AuthorizationForm input:focus{
+    outline: none;
+}
+
+.AuthorizationSubmit{
+    margin-top: 10px;
+    background-color:burlywood;    
+    border-radius: 5px;
+    border-color: burlywood;
+}
+

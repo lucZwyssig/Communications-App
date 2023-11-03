@@ -1,40 +1,46 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import "../../App.css"
 
-function RegisterForm(props) {
-  const [email, setEmail] = useState("");
+function RegisterForm() {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
       const response = await axios.post("http://localhost:3001/api/register", {
-        email: email,
+        username: username,
         password: password,
       }, {
         withCredentials: true,
       });
 
       if (response.status === 200) {
-
         console.log(response.data.message);
+        navigate("/chats/channels");
       }
 
     } catch (error) {
-      console.log("Error:", error);
+      if (error.response && error.response.status === 409) {
+        alert("Username already exists");
+      }
       console.log("Authorization failed");
     }
   };
 
   return (
-    <div>
+    <div className="AuthorizationForm">
+      <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <h2>Email</h2>
+          <h2>Username</h2>
           <input
             type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div>
@@ -45,7 +51,7 @@ function RegisterForm(props) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" className="AuthorizationSubmit">Register</button>
       </form>
     </div>
   );

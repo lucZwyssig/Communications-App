@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 function LoginForm(props) {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   async function handleSubmit(event) {
@@ -11,7 +11,7 @@ function LoginForm(props) {
 
     try {
       const response = await axios.post("http://localhost:3001/api/login", {
-        email: email,
+        username: username,
         password: password,
       }, {
         withCredentials: true,
@@ -23,20 +23,26 @@ function LoginForm(props) {
       }
 
     } catch (error) {
+      if(error.response && error.response.status === 401){
+        alert("incorrect password");
+      }
+      else if (error.response && error.response.status === 404){
+        alert("Not found");   
+      }
       console.log("Error:", error);
       console.log("Authorization failed");
     }
   };
 
   return (
-    <div>
+    <div className="AuthorizationForm">
       <form onSubmit={handleSubmit}>
         <div>
-          <h2>Email</h2>
+          <h2>Username</h2>
           <input
             type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div>
@@ -47,7 +53,7 @@ function LoginForm(props) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" className="AuthorizationSubmit">Register</button>
       </form>
     </div>
   );

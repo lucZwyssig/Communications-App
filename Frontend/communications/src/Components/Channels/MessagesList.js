@@ -12,7 +12,7 @@ function MessagesList() {
     console.log(id.channelId);
     const intervalId = setInterval(() => {
       getMessages();
-    }, 8000);
+    }, 5000);
 
     return () => {
       clearInterval(intervalId);

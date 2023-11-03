@@ -1,12 +1,13 @@
 import RegisterForm from "../Components/Authorization/RegisterForm";
+import { Container } from "react-bootstrap";
 
 function Register() {
   
 
   return (
-    <div>
-      <RegisterForm endpoint="register"/>
-    </div>
+    <Container fluid className="AuthorizationContainer">
+      <RegisterForm/>
+    </Container>
   );
 }
 

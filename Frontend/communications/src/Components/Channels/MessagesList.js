@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router';
+import Header from '../Other/Header';
 
 function MessagesList() {
   const id = useParams();
@@ -36,26 +38,27 @@ function MessagesList() {
     }
   }
 
-  async function postMessage(){
-    try{
+  async function postMessage() {
+    try {
       await axios.post(`http://localhost:3001/api/chats/${id.channelId}/messages`, {
         text: writingMessage
       }, {
         withCredentials: true,
       });
       getMessages();
-    } catch(error){
+    } catch (error) {
       console.log(error);
     };
   };
 
-  function handleSubmit(){
+  function handleSubmit() {
     postMessage();
     setWritingMessage("");
   };
 
   return (
-    <div>
+    <Container fluid>
+      <Header/>
       {messages.map((message) => (
         <div key={message._id}>
           <h3>{message.text}</h3>
@@ -64,7 +67,7 @@ function MessagesList() {
       ))}
       <input type='text' placeholder='write message' value={writingMessage} onChange={(e) => setWritingMessage(e.target.value)}></input>
       <input type='button' onClick={handleSubmit} value='submit'></input>
-    </div>
+    </Container>
   );
 }
 

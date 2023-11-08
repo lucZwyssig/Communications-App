@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function LoginForm(props) {
   const [username, setUsername] = useState("");
@@ -23,11 +23,11 @@ function LoginForm(props) {
       }
 
     } catch (error) {
-      if(error.response && error.response.status === 401){
+      if (error.response && error.response.status === 401) {
         alert("incorrect password");
       }
-      else if (error.response && error.response.status === 404){
-        alert("Not found");   
+      else if (error.response && error.response.status === 404) {
+        alert("Not found");
       }
       console.log("Error:", error);
       console.log("Authorization failed");
@@ -36,6 +36,7 @@ function LoginForm(props) {
 
   return (
     <div className="AuthorizationForm">
+      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <h2>Username</h2>
@@ -53,7 +54,10 @@ function LoginForm(props) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" className="AuthorizationSubmit">Register</button>
+        <div className="SubmitDiv">
+          <input type="submit" value="Login" className="AuthorizationSubmit"></input>
+          <Link to={"/"} className="AuthorizationLink">don't have an account?</Link>
+        </div>
       </form>
     </div>
   );

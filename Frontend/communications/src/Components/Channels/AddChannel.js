@@ -24,10 +24,11 @@ function AddChannel(props) {
             {showPopup ?
                 <div className="overlay">
                     <div className="content">
-                        <p>Add Channel</p>
                         <input type="text" value={channelname} onChange={(e) => setChannelname(e.target.value)}></input>
                         <input type="button" onClick={postAddChannel} value="create"></input>
-                        <CloseButton onClick={() => setShowPopup(false)}/>
+                        <div style={{ display: 'flex', flexDirection: "column", justifyContent: "flex-end" }}>
+  <CloseButton onClick={() => setShowPopup(false)} />
+</div>
                     </div>
                 </div>
                 :

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../App.css"
 
 function RegisterForm() {
@@ -51,7 +51,10 @@ function RegisterForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" className="AuthorizationSubmit">Register</button>
+        <div className="SubmitDiv">
+        <input type="submit" className="AuthorizationSubmit" value="Register"></input>
+        <Link to={"/login"} className="AuthorizationLink">already have an account?</Link>
+        </div>        
       </form>
     </div>
   );

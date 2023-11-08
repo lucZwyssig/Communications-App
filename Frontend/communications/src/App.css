@@ -1,6 +1,51 @@
+#Header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 10px;
+    background: rgb(106,106,105);
+    background: linear-gradient(180deg, rgba(106,106,105,1) 0%, rgba(196,193,193,1) 96%);
+    margin-left: -12px;
+    margin-right: -12px;
+    align-items: center;
+    gap: 5%;
+}
+
+#LogoutButton {
+    
+    background: none;
+    border: none;
+    text-decoration: underline;
+    position: absolute;
+    right: 2%;
+}
+
+@media (max-width: 767px) {
+    
+
+    #Header {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;        
+    }
+    #Header .HeaderLink{
+        margin-left: 0.5%;
+    }
+
+}
+
+.ChannelContainer{
+    background-color: rgb(221, 211, 217);
+    min-height: 100vh;
+}
 
 
-.AuthorizationContainer{
+.HeaderLink{
+    text-decoration: none;
+    color:#1b375e;
+}
+
+.AuthorizationContainer {
     background-color: #407088;
     display: flex;
     justify-content: center;
@@ -8,36 +53,135 @@
     height: 100vh;
 }
 
-.AuthorizationForm{
+.AuthorizationForm {
     border: 1px solid;
-    padding: 5% 5% 10% 5%;
+    padding: 5% 5% 8% 5%;
     background-color: #132743;
     border-radius: 15px;
+
 }
 
-.AuthorizationForm h1{
+.AuthorizationForm h1 {
     color: antiquewhite;
     margin-bottom: 20px;
     font-size: 50px;
 }
 
-.AuthorizationForm h2{
+.AuthorizationForm h2 {
     color: antiquewhite;
     text-decoration: underline white;
 }
 
-.AuthorizationForm input[type=text], input[type=password]{
+.AuthorizationForm input[type=text],
+input[type=password] {
     background-color: rgb(243, 230, 215);
 }
 
-.AuthorizationForm input:focus{
+.AuthorizationForm input:focus {
     outline: none;
 }
 
-.AuthorizationSubmit{
-    margin-top: 10px;
-    background-color:burlywood;    
-    border-radius: 5px;
-    border-color: burlywood;
+.SubmitDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
+.AuthorizationForm input[type=submit] {
+    margin-top: 10px;
+    background-color: rgb(149, 132, 132);
+    border-radius: 5px;
+    border: none;
+    padding: 3px;
+
+}
+
+.AuthorizationLink {
+    color: rgb(186, 143, 143);
+}
+
+#ChannelCol{
+    padding-top: 2%;
+        
+}
+
+#ChannelContentDiv{
+    background-color:#B89FA2;
+    display: flex;
+    border-radius: 5px;
+    max-height: 70vh;
+}
+
+#ChannelsDiv{
+    background-color: #B89FA2;
+    
+    padding: 8%;
+    
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column; 
+    
+    justify-content: center;
+    overflow: auto;
+    max-height: 100%;
+}
+#ChannelsDiv input {
+    background: none;
+    border: none;
+    font-size: 26px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    max-width: 100%; 
+}
+
+#ChannelsDiv ul {
+    padding: 0; 
+    max-height: 100%;
+    overflow: auto;
+    
+  }
+
+
+#ChannelsDiv input{
+    background: none;
+    border: none;
+    font-size: 26px;
+}
+
+#SingleChannelDiv:hover{
+    background-color: gainsboro;
+    border-radius: 5px;
+}
+
+#ChannelMembersDiv{
+    padding: 10% 8% 10% 8%;
+    background-color: rgb(161, 141, 141); 
+    margin-top: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;  
+    border-radius: 4%;  
+}
+
+#AddChannelCol{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: row-reverse;
+    padding: 5% 5% 0% 5%;
+}
+
+#AddChannelCol input[type=button]{
+    border: none;
+    background-color: #132743;    
+    color: #ddc5c8;
+    margin-left: 5px;
+    padding: 2%;
+}
+
+.popup{
+    width: 100%;
+    background-color: #8e7d7f;
+    padding: 5%;
+    border-radius: 5px;
+}

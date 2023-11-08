@@ -9,6 +9,6 @@ function LogoutForm(){
         navigate("/");        
     };
     return(
-        <input type="button" onClick={() => logout()} value="logout"></input>
+        <input type="button" id="LogoutButton" onClick={() => logout()} value="logout"></input>
     );   
 }; export default LogoutForm;

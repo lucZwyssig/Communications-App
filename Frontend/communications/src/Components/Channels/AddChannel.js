@@ -20,16 +20,14 @@ function AddChannel(props) {
         }
     }
     return (
-        <div className="popup">
+        <div className="AddChannel">
             {showPopup ?
-                <div className="overlay">
-                    <div className="content">
-                        <input type="text" value={channelname} onChange={(e) => setChannelname(e.target.value)}></input>
+                    <div className="AddChannelContent">
+                        <CloseButton onClick={() => setShowPopup(false)}/>
+                        <input type="text" placeholder="channel name" value={channelname} onChange={(e) => setChannelname(e.target.value)}></input>
                         <input type="button" onClick={postAddChannel} value="create"></input>
-                        <div style={{ display: 'flex', flexDirection: "column", justifyContent: "flex-end" }}>
-  <CloseButton onClick={() => setShowPopup(false)} />
-</div>
-                    </div>
+                            
+                        
                 </div>
                 :
                 <input type="button" onClick={() => setShowPopup(true)} value="add Channel"></input>

@@ -4,6 +4,7 @@ const ChatChannel = require("../Models/ChatChannelSchema");
 
 const getMessages = async (req, res) => {
     const userId = req.token.userId;
+    const username = req.token.username;
     const channelId = req.params.channelId;
 
     try {
@@ -14,7 +15,13 @@ const getMessages = async (req, res) => {
             return res.status(403).json({ error: 'Access denied' });
         }
 
-        const messages = await ChatMessage.find({ channel: channelId });
+        const documents = await ChatMessage.find({ channel: channelId });
+
+        const messages = documents.map((document)=> ({
+            ...document._doc,
+            messagetype: document.sender === username ? 'user-message' : 'other-message'
+        }));
+
 
         res.status(200).json({ messages });
     } catch (error) {

@@ -11,6 +11,10 @@ const getMessages = async (req, res) => {
         const channel = await ChatChannel.findById(channelId);
 
         
+        if (!channel) {
+            return res.status(404).json({ error: 'Not found' });
+        }
+
         if (!channel.members.some(member => member.userId === userId)) {
             return res.status(403).json({ error: 'Access denied' });
         }

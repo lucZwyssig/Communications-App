@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import Header from '../Other/Header';
+import AddUser from './AddUser';
+
 
 function MessagesList() {
   const id = useParams();
@@ -12,6 +14,7 @@ function MessagesList() {
 
   const messageListRef = useRef(null);
   const prevMessagesLengthRef = useRef(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getMessages();
@@ -36,26 +39,27 @@ function MessagesList() {
   
 
 
+async function getMessages() {
+  try {
+    const response = await axios.get(`http://localhost:3001/api/chats/${id.channelId}/messages`, {
+      withCredentials: true
+    });
 
-  async function getMessages() {
-    try {
-      const response = await axios.get(`http://localhost:3001/api/chats/${id.channelId}/messages`, {
-        withCredentials: true
-      });
-  
-      if (response.status === 200) {
-        setMessages(response.data.messages);
-        
-      } else if (response.status === 304) {
-
-      } else {
-        console.error("Unexpected response status:", response.status);
-      }
-    } catch (error) {
-      console.error("Error getting messages:", error);
+    if (response.status === 200) {
+      setMessages(response.data.messages);
+    }
+  } catch (error) {
+    if (error.response && error.response.status === 404) {
+      navigate("/chats/channels");
+    } else {
+      console.error("Unexpected response status:");
     }
   }
-  
+}
+
+
+
+
   async function postMessage() {
     try {
       await axios.post(`http://localhost:3001/api/chats/${id.channelId}/messages`, {
@@ -110,9 +114,12 @@ function MessagesList() {
           </div>
         ))}
       </div>
-      <div className="WriteMessage">
+      <div className="SingleChannelOptions">
+        <div className="WriteMessage">
         <input type='text' placeholder='write message' value={writingMessage} onChange={(e) => setWritingMessage(e.target.value)} onKeyDown={handleKeyPress}></input>
         <input type='button' onClick={handleSubmit} value='send'></input>
+        </div>
+        <AddUser/>
       </div>
     </Container>
   );

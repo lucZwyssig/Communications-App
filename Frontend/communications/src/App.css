@@ -15,10 +15,11 @@ input[type=text] {
     margin-left: -12px;
     margin-right: -12px;
     gap: 5%;
+    position: sticky;
+    top: 0;
 }
 
 #LogoutButton {
-
     background: none;
     border: none;
     text-decoration: underline;
@@ -234,7 +235,9 @@ input[type=password] {
 
 }
 
-.WriteMessage {
+.SingleChannelOptions{
+    display: flex;
+    justify-content: space-between;
     position: sticky;
     bottom: 0;
     left: 0;
@@ -243,17 +246,29 @@ input[type=password] {
     margin-right: -12px;
     padding: 15px;
     margin-top: -1px;
+}
+
+.AddUser{
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.AddUser:hover{
+    cursor: pointer;
+}
+.WriteMessage {
+    
+    display: flex;
+    
+    justify-content: space-between;
 }
 
 .WriteMessage input[type=text] {
     padding: 6px;
 }
 
-.WriteMessage input[type=text] {
-    width: 40%;
-}
 
 .WriteMessage input[type=button] {
     margin-right: 2%;

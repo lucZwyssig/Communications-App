@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router';
 import Header from '../Other/Header';
 import AddUser from './AddUser';
+import Users from './Users';
+
 
 
 function MessagesList() {
@@ -11,8 +13,6 @@ function MessagesList() {
   const [messages, setMessages] = useState([]);
   const [writingMessage, setWritingMessage] = useState("");
   const lastMessageRef = useRef(null);
-
-  const messageListRef = useRef(null);
   const prevMessagesLengthRef = useRef(0);
   const navigate = useNavigate();
 
@@ -36,26 +36,28 @@ function MessagesList() {
 
     prevMessagesLengthRef.current = messages.length;
   }, [messages]);
+
+
   
 
 
-async function getMessages() {
-  try {
-    const response = await axios.get(`http://localhost:3001/api/chats/${id.channelId}/messages`, {
-      withCredentials: true
-    });
+  async function getMessages() {
+    try {
+      const response = await axios.get(`http://localhost:3001/api/chats/${id.channelId}/messages`, {
+        withCredentials: true
+      });
 
-    if (response.status === 200) {
-      setMessages(response.data.messages);
-    }
-  } catch (error) {
-    if (error.response && error.response.status === 404) {
-      navigate("/chats/channels");
-    } else {
-      console.error("Unexpected response status:");
+      if (response.status === 200) {
+        setMessages(response.data.messages);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        navigate("/chats/channels");
+      } else {
+        console.error("Unexpected response status");
+      }
     }
   }
-}
 
 
 
@@ -67,8 +69,8 @@ async function getMessages() {
       }, {
         withCredentials: true,
       });
-      
-      await getMessages(); 
+
+      await getMessages();
       setWritingMessage("");
     } catch (error) {
       console.log(error);
@@ -76,13 +78,13 @@ async function getMessages() {
   };
 
   function handleSubmit() {
-    if(writingMessage !== ""){
-      
-    postMessage();
-    setWritingMessage("");
-    
-    
-    } 
+    if (writingMessage !== "") {
+
+      postMessage();
+      setWritingMessage("");
+
+
+    }
   };
 
   function scrollToBottom() {
@@ -93,15 +95,15 @@ async function getMessages() {
 
   function handleKeyPress(event) {
     if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault(); 
+      event.preventDefault();
       handleSubmit();
-      
+
     }
   }
 
   return (
     <Container fluid className="SingleChannelContainer">
-      <Header/>
+      <Header />
       <div id="MessageList">
         {messages.map((message, index) => (
           <div
@@ -114,13 +116,15 @@ async function getMessages() {
           </div>
         ))}
       </div>
-      <div className="SingleChannelOptions">
-        <div className="WriteMessage">
-        <input type='text' placeholder='write message' value={writingMessage} onChange={(e) => setWritingMessage(e.target.value)} onKeyDown={handleKeyPress}></input>
-        <input type='button' onClick={handleSubmit} value='send'></input>
-        </div>
-        <AddUser/>
-      </div>
+      <Row className="SingleChannelOptions">
+        <Col className="WriteMessage col-12 col-md-6">
+          <input type='text' placeholder='write message' value={writingMessage} onChange={(e) => setWritingMessage(e.target.value)} onKeyDown={handleKeyPress}></input>
+          <input type='button' onClick={handleSubmit} value='send'></input>
+          <Users/>
+        </Col>
+        <Col className='col-12 col-md-6 AddUserCol'><AddUser/></Col>
+        
+      </Row>
     </Container>
   );
 }

@@ -36,6 +36,29 @@ const addChannel = async (req, res) => {
     }
 };
 
+const getUsers = async (req, res) => {
+    try{
+        const userId = req.token.userId;
+        const channelId = req.params.channelId;
+        const channel = await ChatChannel.findById(channelId);
+
+        if(!channel){
+            return res.status(404).json({ message: "Not found" });
+        }
+
+        if (!channel.members.some(member => member.userId.toString() === userId.toString())) {
+            return res.status(404).json({ message: 'Not found' });
+        }
+
+        const users = channel.members.map(user => user.username);
+
+        res.status(200).json({users: users});
+    } catch (error){
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
 const addUser = async (req, res) => {
     try {
         const userId = req.token.userId;
@@ -45,7 +68,7 @@ const addUser = async (req, res) => {
         const user = await UserSchema.findOne({ username: usernameInput });
 
         if (!user) {
-            return res.status(404).json({ message: "Not found User" });
+            return res.status(404).json({ message: " User Not found" });
         }
 
         const channel = await ChatChannel.findById(channelId);
@@ -55,7 +78,7 @@ const addUser = async (req, res) => {
         }
 
         if (!channel.members.some(member => member.userId.toString() === userId.toString())) {
-            return res.status(403).json({ message: 'Not found' });
+            return res.status(404).json({ message: 'Not found' });
         }
 
         if (channel.members.some(member => member.userId.toString() === user._id.toString())) {
@@ -77,5 +100,6 @@ const addUser = async (req, res) => {
 module.exports = {
     getChannels,
     addChannel,
-    addUser
+    addUser,
+    getUsers
 }

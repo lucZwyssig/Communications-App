@@ -3,11 +3,15 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 
-function Users() {
+function Users(props) {
 
     useEffect(() => {
         getUsers();
     }, []);
+
+    useEffect(() => {
+        getUsers();
+    }, [props.getUsers])
 
     const id = useParams();
     const navigate = useNavigate();
@@ -30,7 +34,7 @@ function Users() {
     }
     return (
         <div className="Users">
-            {users.map((user) => <p>{user}</p>)}
+            {users.map((user) => <p key={user}>{user} &nbsp; </p>)}
         </div>
     );
 }; export default Users;

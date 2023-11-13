@@ -12,6 +12,7 @@ function MessagesList() {
   const id = useParams();
   const [messages, setMessages] = useState([]);
   const [writingMessage, setWritingMessage] = useState("");
+  const [getUsers, setGetUsers] = useState(false);
   const lastMessageRef = useRef(null);
   const prevMessagesLengthRef = useRef(0);
   const navigate = useNavigate();
@@ -91,7 +92,7 @@ function MessagesList() {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }
+  };
 
   function handleKeyPress(event) {
     if (event.key === 'Enter' && !event.shiftKey) {
@@ -99,7 +100,7 @@ function MessagesList() {
       handleSubmit();
 
     }
-  }
+  };
 
   return (
     <Container fluid className="SingleChannelContainer">
@@ -120,9 +121,9 @@ function MessagesList() {
         <Col className="WriteMessage col-12 col-md-6">
           <input type='text' placeholder='write message' value={writingMessage} onChange={(e) => setWritingMessage(e.target.value)} onKeyDown={handleKeyPress}></input>
           <input type='button' onClick={handleSubmit} value='send'></input>
-          <Users/>
+          <Users getUsers={getUsers}/>
         </Col>
-        <Col className='col-12 col-md-6 AddUserCol'><AddUser/></Col>
+        <Col className='col-12 col-md-6 AddUserCol'><AddUser setGetUsers={setGetUsers}/></Col>
         
       </Row>
     </Container>

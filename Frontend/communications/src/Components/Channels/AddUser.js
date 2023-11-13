@@ -5,7 +5,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 import { CloseButton } from "react-bootstrap";
 
-function AddUser() {
+function AddUser(props) {
     const id = useParams();
     const [usernameInput, setUsernameInput] = useState("");
     const [showText, setShowText] = useState(false);
@@ -22,12 +22,18 @@ function AddUser() {
                 console.log("user added");
                 setUsernameInput("");
                 setShowText(false);
+                props.setGetUsers(true);
             }
 
-            else if (response.status === 400) {
-            }
+            
 
         } catch (error) {
+            if(error.response && error.response.status === 400){
+                alert("user already exists");
+                setUsernameInput("");
+            } else if(error.response && error.response.status == 404){
+                alert("User not found");
+            }
             console.log("error");
         }
     };

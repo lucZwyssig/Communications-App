@@ -10,11 +10,13 @@ const ChannelController = require("../Controllers/ChannelController");
 
 const MessageController = require("../Controllers/MessageController");
 
+const MailController = require("../Controllers/MailController");
+
 router.post("/register", LoginController.register);
 
 router.post("/login", LoginController.login);
 
-router.get("/test", LoginController.verify, TestController.test);
+router.post("/mail", LoginController.verify, MailController.sendMail);
 
 router.delete("/logout", LoginController.verify, LoginController.logout);
 

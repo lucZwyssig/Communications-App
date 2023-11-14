@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { PiMagnifyingGlassBold } from "react-icons/pi";
 import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 import { CloseButton } from "react-bootstrap";
 
 function AddUser(props) {
+
+    const navigate = useNavigate();
     const id = useParams();
     const [usernameInput, setUsernameInput] = useState("");
     const [showText, setShowText] = useState(false);
@@ -25,13 +27,13 @@ function AddUser(props) {
                 props.setGetUsers(true);
             }
 
-            
+
 
         } catch (error) {
-            if(error.response && error.response.status === 400){
+            if (error.response && error.response.status === 400) {
                 alert("user already exists");
                 setUsernameInput("");
-            } else if(error.response && error.response.status == 404){
+            } else if (error.response && error.response.status == 404) {
                 alert("User not found");
             }
             console.log("error");
@@ -42,6 +44,22 @@ function AddUser(props) {
         if (event.key === 'Enter' && !event.shiftKey) {
             event.preventDefault();
             addUser();
+        };
+    };
+
+    async function leaveChannel() {
+        try {
+            const response = await axios.delete(`http://localhost:3001/api/chats/${id.channelId}/users`, {
+                withCredentials: true,
+            });
+            navigate("/chats/channels");
+        } catch (error) {
+            if (error.response && error.response.status === 404) {
+                navigate("/chats/channels");
+            }
+            else {
+                console.log("error :(");
+            };
         };
     };
 
@@ -56,8 +74,10 @@ function AddUser(props) {
                     </div>
                     :
                     <div className="AddUser" onClick={() => setShowText(true)}>
+
                         <p>Add User</p>
                         <AiOutlinePlus />
+                        <input type="button" value="leave Channel" onClick={leaveChannel}></input>
                     </div>
             }
         </div>

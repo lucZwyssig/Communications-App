@@ -30,10 +30,41 @@ const addChannel = async (req, res) => {
         const newChannel = await ChatChannel.create({ name: channelName, members: [newMember] });
         res.status(201).json({ message: "Channel created"});
     } catch (error) {
+        if (error.code === 11000) {
+            res.status(409).json({ message: 'Channel already exists' });
+            console.log(error)
+        } else {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
+        }
     }
 };
+
+const leaveChannel = async(req,res) => {
+    try{
+        const userId = req.token.userId;
+        const channelId = req.params.channelId;
+        const channel = await ChatChannel.findById(channelId);
+
+        if(!channel){
+            return res.status(404).json({ message: "Not found" });
+        }
+
+        if (!channel.members.some(member => member.userId.toString() === userId.toString())) {
+            return res.status(404).json({ message: 'Not found' });
+        }
+
+        const Index = channel.members.findIndex(member => member.userId.toString() === userId.toString());
+
+        channel.members.splice(Index, 1);
+
+        await channel.save();
+        res.json({message: "deleted"}).status(200);   
+
+    } catch(error){
+        console.log(error);
+    }
+}
 
 const getUsers = async (req, res) => {
     try{
@@ -100,5 +131,6 @@ module.exports = {
     getChannels,
     addChannel,
     addUser,
-    getUsers
+    getUsers,
+    leaveChannel
 }

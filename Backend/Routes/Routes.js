@@ -32,6 +32,8 @@ router.post("/chats/:channelId", LoginController.verify, ChannelController.addUs
 
 router.get("/chats/:channelId/users", LoginController.verify, ChannelController.getUsers);
 
+router.delete("/chats/:channelId/users", LoginController.verify, ChannelController.leaveChannel);
+
 
 
 module.exports = router;

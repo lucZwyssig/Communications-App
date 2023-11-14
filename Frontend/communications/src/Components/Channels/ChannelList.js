@@ -23,6 +23,8 @@ function ChannelList() {
             console.log(error);
         }
     };
+
+    
     return (
 
         <Container fluid className="ChannelContainer">

@@ -16,6 +16,10 @@ function AddChannel(props) {
             props.getChannels();
             setChannelname("");
         } catch (error) {
+            if(error.response && error.response.status === 409){
+                alert("channel name already exists");
+                setChannelname("");
+            }
             console.log(error);
         }
     }

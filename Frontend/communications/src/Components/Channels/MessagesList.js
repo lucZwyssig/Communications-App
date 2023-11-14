@@ -39,7 +39,7 @@ function MessagesList() {
   }, [messages]);
 
 
-  
+
 
 
   async function getMessages() {
@@ -74,7 +74,7 @@ function MessagesList() {
       await getMessages();
       setWritingMessage("");
     } catch (error) {
-      console.log(error);
+      console.log("error :(");
     }
   };
 
@@ -87,6 +87,21 @@ function MessagesList() {
 
     }
   };
+
+  async function leaveChannel() {
+    try {
+      await axios.delete(`http://localhost:3001/api/chats/${id.channelId}/users`, {
+        withCredentials: true,
+      });
+      navigate("/chats/channels");
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        navigate("/chats/channels");
+      } else {
+        console.error("Unexpected response status");
+      }
+    }
+  }
 
   function scrollToBottom() {
     if (lastMessageRef.current) {
@@ -121,10 +136,10 @@ function MessagesList() {
         <Col className="WriteMessage col-12 col-md-6">
           <input type='text' placeholder='write message' value={writingMessage} onChange={(e) => setWritingMessage(e.target.value)} onKeyDown={handleKeyPress}></input>
           <input type='button' onClick={handleSubmit} value='send'></input>
-          <Users getUsers={getUsers}/>
+          <Users getUsers={getUsers} />
         </Col>
-        <Col className='col-12 col-md-6 AddUserCol'><AddUser setGetUsers={setGetUsers}/></Col>
-        
+        <Col className='col-12 col-md-6 AddUserCol'><AddUser setGetUsers={setGetUsers} /></Col>
+
       </Row>
     </Container>
   );

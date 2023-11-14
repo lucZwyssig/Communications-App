@@ -1,10 +1,9 @@
-
-
-input[type=text], textarea {
+input[type=text],
+textarea {
     outline: none;
 }
 
-textarea{
+textarea {
     resize: none;
     height: fit-content;
 }
@@ -22,7 +21,7 @@ textarea{
     gap: 5%;
     position: sticky;
     top: 0;
-    
+
 }
 
 #LogoutButton {
@@ -55,7 +54,7 @@ textarea{
 }
 
 .AuthorizationContainer {
-    background-color: #407088;
+    background-color: #191919;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -63,31 +62,30 @@ textarea{
     height: 100vh;
 }
 
-.ContactDiv{
+.ContactDiv {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 15px;
-    
+
 }
 
 .AuthorizationForm {
     border: 1px solid;
     padding: 5% 5% 8% 5%;
-    background-color: #132743;
+    background-color: #7A696B;
     border-radius: 15px;
     overflow: auto;
 
 }
 
-.AuthorizationForm p{
+.AuthorizationForm p {
     color: white;
 }
 
 .AuthorizationForm h1 {
     color: antiquewhite;
     margin-bottom: 20px;
-    font-size: 50px;
 }
 
 .AuthorizationForm h2 {
@@ -95,7 +93,10 @@ textarea{
     text-decoration: underline white;
 }
 
-.AuthorizationForm input[type=text], input[type=password], input[type=email], textarea {
+.AuthorizationForm input[type=text],
+input[type=password],
+input[type=email],
+textarea {
     background-color: rgb(243, 230, 215);
 }
 
@@ -119,25 +120,30 @@ textarea{
 }
 
 .AuthorizationLink {
-    color: rgb(186, 143, 143);
+    color: rgb(227, 224, 224);
 }
 
 
 
 .ChannelContainer {
-    background-color: rgb(221, 211, 217);
-    
+    background:
+        radial-gradient(35.36% 35.36% at 100% 25%, #0000 66%, #191919 68% 70%, #0000 72%) 37px 37px/calc(2*37px) calc(2*37px),
+        radial-gradient(35.36% 35.36% at 0 75%, #0000 66%, #191919 68% 70%, #0000 72%) 37px 37px/calc(2*37px) calc(2*37px),
+        radial-gradient(35.36% 35.36% at 100% 25%, #0000 66%, #191919 68% 70%, #0000 72%) 0 0/calc(2*37px) calc(2*37px),
+        radial-gradient(35.36% 35.36% at 0 75%, #0000 66%, #191919 68% 70%, #0000 72%) 0 0/calc(2*37px) calc(2*37px),
+        repeating-conic-gradient(#ddd3d9 0 25%, #0000 0 50%) 0 0/calc(2*37px) calc(2*37px),
+        radial-gradient(#0000 66%, #191919 68% 70%, #0000 72%) 0 calc(37px/2)/37px 37px #ddd3d9;
 }
 
-#ChannelPageDiv{
+#ChannelPageDiv {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    
+
 }
 
 
-#ChannelCol{
+#ChannelCol {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -154,7 +160,7 @@ textarea{
     max-height: 80%;
 }
 
-.AddChannel{
+.AddChannel {
     display: flex;
     align-items: center;
     padding-left: 15px;
@@ -254,7 +260,7 @@ textarea{
 
 }
 
-.SingleChannelOptions{
+.SingleChannelOptions {
     display: flex;
     justify-content: space-between;
     position: sticky;
@@ -268,21 +274,22 @@ textarea{
     overflow: auto;
 }
 
-.AddUser{
+.AddUser {
     display: flex;
     align-items: center;
     gap: 10px;
 
 }
 
-.AddUser:hover{
+.AddUser:hover {
     cursor: pointer;
 }
+
 .WriteMessage {
-    
+
     display: flex;
     justify-content: flex-start;
-    
+
     flex-grow: 1;
 }
 
@@ -304,7 +311,7 @@ textarea{
     padding: 2px;
 }
 
-.AddUserCol{
+.AddUserCol {
     display: flex;
     justify-content: flex-end;
 }
@@ -312,26 +319,28 @@ textarea{
 @media (max-width: 767px) {
 
 
-    .AddUserCol{
+    .AddUserCol {
         justify-content: flex-start;
         padding-top: 5%;
     }
 
 }
 
-.AboutContainer{
+.AboutContainer {
     background-color: #191919;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between  ;
+    justify-content: space-between;
+    gap: 5px;
 }
 
-.AboutContainer h1, .AboutContainer h2 {
-    color: #A4622E;
+.AboutContainer h1,
+.AboutContainer h2 {
+    color: #7A696B;
 }
 
-.AboutContainer p{
+.AboutContainer p {
     color: rgb(221, 217, 217);
 }
 
@@ -340,5 +349,3 @@ textarea{
     justify-self: flex-end;
     background-color: #132743;
 }
-
-

@@ -1,9 +1,9 @@
 const UserSchema = require("../Models/UserSchema");
-const ChatMessage = require('../Models/ChatMessageSchema');
 const ChatChannel = require("../Models/ChatChannelSchema");
 
 const getChannels = async (req, res) => {
     const userId = req.token.userId;
+    console.log(userId);
     try {
         const channels = await ChatChannel.find({ 'members.userId': userId });
         res.status(200).json({ channels });
@@ -29,7 +29,7 @@ const addChannel = async (req, res) => {
         };
 
         const newChannel = await ChatChannel.create({ name: channelName, members: [newMember] });
-        res.status(201).json({ message: "Channel created", channel: newChannel });
+        res.status(201).json({ message: "Channel created"});
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });

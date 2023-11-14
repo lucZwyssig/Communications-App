@@ -15,34 +15,34 @@ const transport = nodemailer.createTransport({
 
 const sendMail = (req, res) => {
 
-    try{
-    const { email, subject, text } = req.body;
-    if (!email || !subject || !text) {
-        return res.sendStatus(400);
-    };
+    try {
+        const { email, subject, text } = req.body;
+        if (!email || !subject || !text) {
+            return res.sendStatus(400);
+        };
 
-    const mailoptions = {
-        from: email,
-        to: "test@test.com",
-        subject: subject,
-        text: text,
-    };
+        const mailoptions = {
+            from: email,
+            to: "test@test.com",
+            subject: subject,
+            text: text,
+        };
 
-    transport.sendMail(mailoptions, (error, info) => {
-        if (error) {
-            console.error(error);
-        } 
-    });
+        transport.sendMail(mailoptions, (error, info) => {
+            if (error) {
+                console.error(error);
+            }
+        });
 
-    res.sendStatus(201);
-} catch(error){
-    console.log(error);
-    res.sendStatus(500);
-}
+        res.sendStatus(201);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
 
 
-}
+};
 
 module.exports = {
     sendMail,
-}
+};

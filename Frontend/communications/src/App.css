@@ -318,3 +318,27 @@ textarea{
     }
 
 }
+
+.AboutContainer{
+    background-color: #191919;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between  ;
+}
+
+.AboutContainer h1, .AboutContainer h2 {
+    color: #A4622E;
+}
+
+.AboutContainer p{
+    color: rgb(221, 217, 217);
+}
+
+.Footer {
+    margin-top: auto;
+    justify-self: flex-end;
+    background-color: #132743;
+}
+
+

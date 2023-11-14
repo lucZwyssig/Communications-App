@@ -6,8 +6,8 @@ function Header(){
         <div id="Header">
             <h3>Chat App</h3>
             <Link to="/chats/channels" className="HeaderLink">channels</Link>
-            <Link to="/Settings" className="HeaderLink">settings</Link>
-            <Link to="/about" className="HeaderLink">contact</Link>
+            <Link to="/about" className="HeaderLink">About Us</Link>
+            <Link to="/contact" className="HeaderLink">contact</Link>
             <LogoutForm/>
         </div>
     );

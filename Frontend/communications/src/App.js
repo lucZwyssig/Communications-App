@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Channels from './Pages/Channels';
 import SingleChannel from './Pages/SingleChannel';
 import Contact from './Pages/Contact';
-import Settings from "./Pages/Settings";
+import AboutUs from './Pages/AboutUs';
 
 function App() {
   return (
@@ -17,8 +17,8 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/chats/channels' element={<Channels/>}/>
         <Route path='/chats/channel/:channelId' element={<SingleChannel/>}/> 
-        <Route path='/about' element={<Contact/>}/> 
-        <Route path='/settings' element={<Settings/>}/>
+        <Route path='/contact' element={<Contact/>}/> 
+        <Route path='/about' element={<AboutUs/>}/>
       </Routes>
       </BrowserRouter>
       

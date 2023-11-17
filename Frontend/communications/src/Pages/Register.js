@@ -6,6 +6,7 @@ function Register() {
 
   return (
     <Container fluid className="AuthorizationContainer">
+      <h1 style={{height: "70px", color:"white"}}>C(h)at App</h1>
       <RegisterForm/>
     </Container>
   );

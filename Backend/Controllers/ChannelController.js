@@ -1,5 +1,6 @@
 const UserSchema = require("../Models/UserSchema");
 const ChatChannel = require("../Models/ChatChannelSchema");
+const ChatMessageController = require("./MessageController");
 
 const getChannels = async (req, res) => {
     const userId = req.token.userId;
@@ -51,12 +52,18 @@ const leaveChannel = async(req,res) => {
         }
 
         if (!channel.members.some(member => member.userId.toString() === userId.toString())) {
-            return res.status(404).json({ message: 'Not found' });
+            return res.status(404).json({ message: "Not found" });
         }
 
         const Index = channel.members.findIndex(member => member.userId.toString() === userId.toString());
 
         channel.members.splice(Index, 1);
+
+        if(channel.members.length === 0){
+            await ChatChannel.findByIdAndDelete(channel);
+            await ChatMessageController.deleteAllMessages(channelId);
+            return res.json({message: "channel deleted"}).status(200);
+        }
 
         await channel.save();
         res.json({message: "deleted"}).status(200);   

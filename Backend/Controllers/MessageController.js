@@ -64,7 +64,19 @@ const postMessage = async (req, res) => {
     }
 };
 
+const deleteAllMessages = async (channelId) => {
+    try {
+
+        await ChatMessage.deleteMany({channel: channelId});
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
 module.exports = {
     getMessages,
-    postMessage
+    postMessage,
+    deleteAllMessages
 }

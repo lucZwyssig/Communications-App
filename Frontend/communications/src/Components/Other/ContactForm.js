@@ -29,8 +29,11 @@ function ContactForm() {
             }
 
         } catch (error) {
-            
-            console.log("error")
+            alert("there was an error :(");
+            console.log("error");
+            setEmail("");
+            setSubject("");
+            setText("");
         }
     };
 

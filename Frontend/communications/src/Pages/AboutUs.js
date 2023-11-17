@@ -10,21 +10,20 @@ function AboutUs(){
                 <p>This app is a school project for the Berufsbildnerschule Winterthur (BBW), designed and created by Luc Zwyssig in the third year of 
                     the Informatikmittelschule (IMS) 
                 </p>
-                <h2>Implementation</h2>
+                <h1>Implementation</h1>
                 <div>
                 <p>The project was created with React in the frontend and Nodejs express in the backend. The backend has a database connection to 
-                    a MongoDB database running in a containerized environment in docker.
+                    a MongoDB database running in a containerized environment in docker. The app uses authentication and authorization mechanisms to ensure secure user access. The backend follows RESTful principles, providing a scalable API.
+
                 </p>
-                <p>
-                    The app uses authentication and authorization mechanisms to ensure secure user access. The backend follows RESTful principles, providing a scalable API.
-                </p>
+                
                 </div>
-                <h2>Documentation</h2>
+                <h1>Documentation</h1>
                 <p>The whole Project has been documented on Github <Link to={"https://github.com/lucZwyssig/Communications-App"}>under this link</Link></p>
                 <Table className="Footer" responsive variant="dark">
                     <thead>
                         <tr>
-                            <th scope="col">Kontakt</th>
+                            <th scope="col">Contact</th>
                             <th scope="col">Github</th> 
                             <th scope="col">Copyright</th>
                         </tr>

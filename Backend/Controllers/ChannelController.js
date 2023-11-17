@@ -29,25 +29,25 @@ const addChannel = async (req, res) => {
         };
 
         const newChannel = await ChatChannel.create({ name: channelName, members: [newMember] });
-        res.status(201).json({ message: "Channel created"});
+        res.status(201).json({ message: "Channel created" });
     } catch (error) {
         if (error.code === 11000) {
             res.status(409).json({ message: 'Channel already exists' });
             console.log(error)
         } else {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+            console.error(error);
+            res.status(500).json({ message: 'Internal server error' });
         }
     }
 };
 
-const leaveChannel = async(req,res) => {
-    try{
+const leaveChannel = async (req, res) => {
+    try {
         const userId = req.token.userId;
         const channelId = req.params.channelId;
         const channel = await ChatChannel.findById(channelId);
 
-        if(!channel){
+        if (!channel) {
             return res.status(404).json({ message: "Not found" });
         }
 
@@ -59,27 +59,27 @@ const leaveChannel = async(req,res) => {
 
         channel.members.splice(Index, 1);
 
-        if(channel.members.length === 0){
+        if (channel.members.length === 0) {
             await ChatChannel.findByIdAndDelete(channel);
             await ChatMessageController.deleteAllMessages(channelId);
-            return res.json({message: "channel deleted"}).status(200);
+            return res.json({ message: "channel deleted" }).status(200);
         }
 
         await channel.save();
-        res.json({message: "deleted"}).status(200);   
+        res.json({ message: "deleted" }).status(200);
 
-    } catch(error){
+    } catch (error) {
         console.log(error);
     }
 }
 
 const getUsers = async (req, res) => {
-    try{
+    try {
         const userId = req.token.userId;
         const channelId = req.params.channelId;
         const channel = await ChatChannel.findById(channelId);
 
-        if(!channel){
+        if (!channel) {
             return res.status(404).json({ message: "Not found" });
         }
 
@@ -89,8 +89,8 @@ const getUsers = async (req, res) => {
 
         const users = channel.members.map(user => user.username);
 
-        res.status(200).json({users: users});
-    } catch (error){
+        res.status(200).json({ users: users });
+    } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
     }

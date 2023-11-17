@@ -10,7 +10,7 @@ const getMessages = async (req, res) => {
     try {
         const channel = await ChatChannel.findById(channelId);
 
-        
+
         if (!channel) {
             return res.status(404).json({ error: 'Not found' });
         }
@@ -21,7 +21,7 @@ const getMessages = async (req, res) => {
 
         const documents = await ChatMessage.find({ channel: channelId });
 
-        const messages = documents.map((document)=> ({
+        const messages = documents.map((document) => ({
             ...document._doc,
             messagetype: document.sender === username ? 'user-message' : 'other-message'
         }));
@@ -67,7 +67,7 @@ const postMessage = async (req, res) => {
 const deleteAllMessages = async (channelId) => {
     try {
 
-        await ChatMessage.deleteMany({channel: channelId});
+        await ChatMessage.deleteMany({ channel: channelId });
 
     } catch (error) {
         console.error(error);

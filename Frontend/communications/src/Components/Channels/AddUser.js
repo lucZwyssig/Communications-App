@@ -6,7 +6,7 @@ import axios from "axios";
 import { CloseButton } from "react-bootstrap";
 
 function AddUser(props) {
-
+    const BackendURL = process.env.BACKEND_URL || "http://localhost:3001";
     const navigate = useNavigate();
     const id = useParams();
     const [usernameInput, setUsernameInput] = useState("");
@@ -14,7 +14,7 @@ function AddUser(props) {
 
     async function addUser() {
         try {
-            const response = await axios.post(`http://localhost:3001/api/chats/${id.channelId}`, {
+            const response = await axios.post(`${BackendURL}/api/chats/${id.channelId}`, {
                 usernameInput: usernameInput,
             }, {
                 withCredentials: true,
@@ -49,7 +49,7 @@ function AddUser(props) {
 
     async function leaveChannel() {
         try {
-            const response = await axios.delete(`http://localhost:3001/api/chats/${id.channelId}/users`, {
+            const response = await axios.delete(`${BackendURL}/api/chats/${id.channelId}/users`, {
                 withCredentials: true,
             });
             navigate("/chats/channels");

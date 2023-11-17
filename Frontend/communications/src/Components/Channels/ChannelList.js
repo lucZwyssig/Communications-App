@@ -6,6 +6,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Header from "../Other/Header";
 
 function ChannelList() {
+    const BackendURL = process.env.BACKEND_URL || "http://localhost:3001";
     const [channels, setChannels] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
@@ -15,7 +16,7 @@ function ChannelList() {
 
     async function getChannels() {
         try {
-            const response = await axios.get("http://localhost:3001/api/chats/channels", {
+            const response = await axios.get(`${BackendURL}/api/chats/channels`, {
                 withCredentials: true
             });
             setChannels(response.data.channels);

@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000", ],
     methods: ["GET", "POST", "DELETE"],
     credentials: true
 }));
@@ -27,7 +27,7 @@ app.use(cors({
 
 app.use("/api", LoginRoutes);
 
-mongoose.connect(`mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@localhost:27017/Communication`).then(() =>{
+mongoose.connect(`mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/Communication`).then(() =>{
     console.log("connected to mongodb");
 }).catch((error) => {
     console.log(error);

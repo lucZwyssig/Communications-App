@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate, Link } from "react-router-dom";
 
 function LoginForm() {
+  const BackendURL = process.env.BACKEND_URL || "http://localhost:3001";
+  const backendUrl = process.env.BACKEND_URL;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  useEffect(()=> {
+    console.log(backendUrl);
+  },[])
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3001/api/login", {
+      const response = await axios.post(`${backendUrl}/api/login`, {
         username: username,
         password: password,
       }, {

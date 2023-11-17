@@ -3,7 +3,7 @@ const { useState } = require("react");
 
 
 function ContactForm() {
-
+    const BackendURL = process.env.BACKEND_URL || "http://localhost:3001";
     const [email, setEmail] = useState("");
     const [subject, setSubject] = useState("");
     const [text, setText] = useState("");
@@ -13,7 +13,7 @@ function ContactForm() {
         event.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:3001/api/mail", {
+            const response = await axios.post(`${BackendURL}/api/mail`, {
                 email: email,
                 subject: subject,
                 text: text,

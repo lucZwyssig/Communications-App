@@ -1,0 +1,15 @@
+FROM node:14-alpine 
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+ENV MONGODB_URI=""
+
+EXPOSE 3001
+
+CMD [ "node", "App.js" ]

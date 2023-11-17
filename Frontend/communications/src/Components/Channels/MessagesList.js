@@ -9,6 +9,7 @@ import Users from './Users';
 
 
 function MessagesList() {
+  const BackendURL = process.env.BACKEND_URL || "http://localhost:3001";
   const id = useParams();
   const [messages, setMessages] = useState([]);
   const [writingMessage, setWritingMessage] = useState("");
@@ -44,7 +45,7 @@ function MessagesList() {
 
   async function getMessages() {
     try {
-      const response = await axios.get(`http://localhost:3001/api/chats/${id.channelId}/messages`, {
+      const response = await axios.get(`${BackendURL}/api/chats/${id.channelId}/messages`, {
         withCredentials: true
       });
 
@@ -65,7 +66,7 @@ function MessagesList() {
 
   async function postMessage() {
     try {
-      await axios.post(`http://localhost:3001/api/chats/${id.channelId}/messages`, {
+      await axios.post(`${BackendURL}/api/chats/${id.channelId}/messages`, {
         text: writingMessage
       }, {
         withCredentials: true,
@@ -90,7 +91,7 @@ function MessagesList() {
 
   async function leaveChannel() {
     try {
-      await axios.delete(`http://localhost:3001/api/chats/${id.channelId}/users`, {
+      await axios.delete(`${BackendURL}/api/chats/${id.channelId}/users`, {
         withCredentials: true,
       });
       navigate("/chats/channels");

@@ -3,7 +3,8 @@ import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import "../../App.css"
 
-function RegisterForm() {
+function RegisterForm() {  
+  const BackendURL = process.env.BACKEND_URL || "http://localhost:3001";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function RegisterForm() {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3001/api/register", {
+      const response = await axios.post(`${BackendURL}/api/register`, {
         username: username,
         password: password,
       }, {

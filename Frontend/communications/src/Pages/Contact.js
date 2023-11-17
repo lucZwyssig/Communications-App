@@ -4,7 +4,7 @@ import ContactForm from "../Components/Other/ContactForm";
 function Contact() {
     return (
 
-        <Container fluid style={{backgroundColor: "#191919", height: "100vh", overflow: "auto"}}>
+        <Container fluid style={{backgroundColor: "#c9bfc2", height: "100vh", overflow: "auto"}}>
             <Header />
             <div className="ContactDiv">
             <ContactForm />

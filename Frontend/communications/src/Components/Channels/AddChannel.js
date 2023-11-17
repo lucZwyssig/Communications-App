@@ -23,12 +23,21 @@ function AddChannel(props) {
             console.log(error);
         }
     }
+
+    function handleKeyPress(event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+          event.preventDefault();
+          postAddChannel();
+    
+        }
+      };
+    
     return (
         <div className="AddChannel">
             {showPopup ?
                     <div className="AddChannelContent">
                         <CloseButton onClick={() => setShowPopup(false)}/>
-                        <input type="text" placeholder="channel name" value={channelname} onChange={(e) => setChannelname(e.target.value)}></input>
+                        <input type="text" placeholder="channel name" value={channelname} onKeyDown={handleKeyPress} onChange={(e) => setChannelname(e.target.value)}></input>
                         <input type="button" onClick={postAddChannel} value="create"></input>
                             
                         

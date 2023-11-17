@@ -29,8 +29,6 @@ function ChannelList() {
 
         <Container fluid className="ChannelContainer">
 
-            {//<Row style={{paddingLeft: "10px", paddingTop: "8px"}}><h1>Channels</h1></Row>
-            }
             <div id="ChannelPageDiv">
                 <Header />
                 <Col id="ChannelCol" className="col-12 col-sm-8 col-md-6 col-lg-4">

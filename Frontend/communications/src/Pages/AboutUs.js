@@ -19,7 +19,7 @@ function AboutUs(){
                 
                 </div>
                 <h1>Documentation</h1>
-                <p>The whole Project has been documented on Github <Link to={"https://github.com/lucZwyssig/Communications-App"}>under this link</Link></p>
+                <p>The whole Project has been documented on Github <Link style={{color: "black"}} to={"https://github.com/lucZwyssig/Communications-App"}>under this link</Link></p>
                 <Table className="Footer" responsive variant="dark">
                     <thead>
                         <tr>

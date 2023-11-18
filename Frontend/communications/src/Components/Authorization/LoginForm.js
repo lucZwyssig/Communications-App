@@ -4,19 +4,16 @@ import { useNavigate, Link } from "react-router-dom";
 
 function LoginForm() {
   const BackendURL = process.env.BACKEND_URL || "http://localhost:3001";
-  const backendUrl = process.env.BACKEND_URL;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  useEffect(()=> {
-    console.log(backendUrl);
-  },[])
+
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`${backendUrl}/api/login`, {
+      const response = await axios.post(`${BackendURL}/api/login`, {
         username: username,
         password: password,
       }, {
@@ -35,7 +32,7 @@ function LoginForm() {
       else if (error.response && error.response.status === 404) {
         alert("Not found");
       }
-      console.log("Error:", error);
+      console.log("Error:");
       console.log("Authorization failed");
     }
   };

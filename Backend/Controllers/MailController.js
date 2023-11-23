@@ -23,7 +23,7 @@ const sendMail = (req, res) => {
 
         const mailoptions = {
             from: email,
-            to: "test@test.com",
+            to: process.env.EMAIL,
             subject: subject,
             text: text,
         };
